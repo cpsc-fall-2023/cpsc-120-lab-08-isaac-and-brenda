@@ -11,8 +11,8 @@ int main(int argc, char* argv[]) {
   std::vector<std::string> arguments{argv, argv + argc};
   // Validate that there is at least one command line argument.
   // If not, print an error message and return a non-zero value.
-  if (arguments.size() < 1) {
-    std::cout << "error: you must supply at least one number\n";
+  if (arguments.size() < 2) {
+    std::cerr << "error: you must supply at least one number\n";
     return 1;
   }
 
@@ -24,18 +24,15 @@ int main(int argc, char* argv[]) {
   // of the arguments vector.
   // Each argument is a std::string. You will need to convert each string into
   // a number with the std::stod or std::stof function.
-
-  std::vector<std::string> numbers{};
-  for (std::string sum : numbers) {
-    sum = std::stod(arguments.at());
-    return 0;
+  double sum = 0.0;
+  for (int i = 1; i < argc; ++i) {
+    double num = std::stod(arguments[i]);
+    sum += num;
   }
-
   // After the loop has finished summing the arguments, calculate the
   // average of the values. Recall that the average is the total value divided
   // by the number of values.
-
-  double average = sum / arguments.size();
+  double average = sum / (argc - 1);
 
   // Use cout to print out a message of the form
   // average = *AVERAGE*
